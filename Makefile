@@ -10,6 +10,8 @@ SRC =	main.c\
 		ncurses_display.c\
 		ncurses_remember.c\
 		ncurses_history.c\
+		ncurses_extension.c\
+		radix_tree.c\
 
 OBJ =	$(SRC:.c=.o)
  

@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:51:03 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/05/30 18:07:30 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/01 14:51:35 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ typedef struct		s_rmb
 	struct s_rmb	*next;
 	struct s_rmb	*prev;
 }					t_rmb;
+
+typedef struct		s_rdx
+{
+	char			*str;
+	bool			st;
+	struct s_rdx	*next;
+	struct s_rdx	*prev;
+	struct s_rdx	*down;
+}					t_rdx;
 
 typedef struct		s_str
 {
@@ -105,6 +114,12 @@ int					nc_delete(t_ncurses *nc);
 void				nc_add_history(t_rmb **lst, t_ctn *ptr);
 void				nc_reset_history(t_ncurses *nc);
 void				nc_attrib_history(t_str *str, t_ctn *ev);
+
+char		*strjoin(char const *s1, char const *s2);
+
+
+void	radix_insert(t_rdx **root, char *str);
+void	radix_print(t_rdx *root, char *cur);
 
 
 #endif

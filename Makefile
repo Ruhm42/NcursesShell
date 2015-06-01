@@ -11,7 +11,9 @@ SRC =	main.c\
 		ncurses_remember.c\
 		ncurses_history.c\
 		ncurses_extension.c\
+		ncurses_completion.c\
 		radix_tree.c\
+		radix_build_tree.c\
 
 OBJ =	$(SRC:.c=.o)
  

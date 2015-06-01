@@ -6,24 +6,11 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/01 11:44:04 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 14:55:31 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/01 15:09:17 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ncurses_shell.h"
-
-static t_rdx	*new_node(char *str)
-{
-	t_rdx	*ret;
-
-	if (!(ret = malloc(sizeof(t_rdx))))
-		return (NULL);
-	memset(ret, 0, sizeof(t_rdx));
-	ret->st = true;
-	if (str)
-		ret->str = strdup(str);
-	return (ret);
-}
 
 static void		radix_join(t_rdx **root, t_rdx *actual, char *str)
 {
@@ -39,7 +26,7 @@ static void		radix_join(t_rdx **root, t_rdx *actual, char *str)
 		*root = tmp;
 }
 
-static void		radix_add( t_rdx *actual, char *str)
+static void		radix_add(t_rdx *actual, char *str)
 {
 	t_rdx	*tmp;
 
@@ -60,30 +47,11 @@ static void		radix_split(t_rdx *actual, char *str, unsigned int index)
 	}
 }
 
-// void	radix_iterate(t_rdx **root, char *str)
-// {
-	
-// }
-
-void	radix_insert(t_rdx **root, char *str)
+static void		radix_iterate(t_rdx **root, t_rdx *tmp, char *str)
 {
-	t_rdx				*tmp;
 	unsigned int		index;
 	int					ret;
 
-	if (!str || !str[0])
-		return ;
-	if (!(*root))
-	{
-		*root = new_node(NULL);
-		(*root)->st = false;
-		return (radix_insert(root, str));
-	}
-	if (!(tmp = (*root)->down))
-	{
-		(*root)->down = new_node(str);
-		return ;
-	}
 	while (tmp)
 	{
 		index = 0;
@@ -104,5 +72,22 @@ void	radix_insert(t_rdx **root, char *str)
 	}
 }
 
+void			radix_insert(t_rdx **root, char *str)
+{
+	t_rdx				*tmp;
 
-
+	if (!str || !str[0])
+		return ;
+	if (!(*root))
+	{
+		*root = new_node(NULL);
+		(*root)->st = false;
+		return (radix_insert(root, str));
+	}
+	if (!(tmp = (*root)->down))
+	{
+		(*root)->down = new_node(str);
+		return ;
+	}
+	radix_iterate(root, tmp, str);
+}

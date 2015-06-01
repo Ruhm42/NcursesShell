@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:53:17 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/05/30 17:58:14 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/01 16:47:20 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		init_fcts(t_ncurses *nc)
 	nc_fct_init(&(nc->fcts[3]), DEL_K, nc_del);
 	nc_fct_init(&(nc->fcts[4]), KEY_UP, nc_up);
 	nc_fct_init(&(nc->fcts[5]), KEY_DOWN, nc_down);
-	nc_fct_init(&(nc->fcts[6]), 9, nc_down);
+	nc_fct_init(&(nc->fcts[6]), '\t', nc_tab);
 }
 
 bool			nc_start(t_ncurses *nc)

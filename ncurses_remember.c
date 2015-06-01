@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/30 10:51:32 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/05/30 17:57:36 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/01 16:07:57 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void		pull_ctn(t_rmb **hist, t_str *str, char *concat)
 
 	i = 0;
 	ptr = str->cur;
-	endwin();
 	while (ptr)
 	{
 		concat[i++] = ptr->c;

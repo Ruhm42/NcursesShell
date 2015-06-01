@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:51:03 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 14:51:35 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/01 16:45:57 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_str
 {
 	t_ctn			*cur;
 	unsigned int	pos;
+	unsigned int	pos_tab;
 	unsigned int	sz;
 }					t_str;
 
@@ -79,6 +80,7 @@ typedef struct		s_ncurses
 	t_rmb			*remember;
 	t_rmb			*hist;
 	t_rmb			*cur_hist;
+	t_rdx			*tree;
 	t_pt			coord;
 	t_fct			fcts[TAB_SIZE];
 }					t_ncurses;
@@ -100,6 +102,7 @@ void				nc_del(void *arg);
 void				nc_up(void *arg);
 void				nc_down(void *arg);
 void				nc_enter(void *arg);
+void				nc_tab(void *arg);
 bool				nc_fct_exec(t_fct *fct, int k, void *arg);
 void				nc_fct_init(t_fct *fct, int k, void (*f)(void *));
 
@@ -120,6 +123,7 @@ char		*strjoin(char const *s1, char const *s2);
 
 void	radix_insert(t_rdx **root, char *str);
 void	radix_print(t_rdx *root, char *cur);
+t_rdx	*new_node(char *str);
 
 
 #endif

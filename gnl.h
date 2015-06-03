@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_build_tree.c                                 :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/01 15:00:38 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/02 12:53:29 by rda-cost         ###   ########.fr       */
+/*   Created: 2014/03/27 09:09:07 by rda-cost          #+#    #+#             */
+/*   Updated: 2015/06/02 11:06:45 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "radix.h"
+#ifndef GNL_H
+# define GNL_H
 
-t_rdx	*new_node(char *str)
-{
-	t_rdx	*ret;
+# define BUFF_SIZE 5000
+# include <stdlib.h>
+# include <string.h>
+# include <fcntl.h>
+# include <unistd.h>
 
-	if (!(ret = malloc(sizeof(t_rdx))))
-		return (NULL);
-	memset(ret, 0, sizeof(t_rdx));
-	ret->st = true;
-	if (str)
-		ret->str = strdup(str);
-	return (ret);
-}
+int	gnl(int const fd, char **line);
+
+#endif

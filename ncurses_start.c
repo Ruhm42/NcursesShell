@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:53:17 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 16:47:20 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/03 12:09:10 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ static void		init_fcts(t_ncurses *nc)
 	nc_fct_init(&(nc->fcts[6]), '\t', nc_tab);
 }
 
-bool			nc_start(t_ncurses *nc)
+static void		nc_init_radix(t_ncurses *nc, int ac, char **av)
+{
+	memset(&(nc->search), 0, sizeof(t_search));
+	if (ac > 1)
+		radix_from_file(&(nc->search.tree), av[1]);
+}
+
+bool			nc_start(t_ncurses *nc, int ac, char **av)
 {
 	memset(nc, 0, sizeof(t_ncurses));
 	memset(&(nc->str), 0, sizeof(t_str));
+	nc_init_radix(nc, ac, av);
 	if (!(nc->win = initscr()))
 		return (false);
 	noecho();

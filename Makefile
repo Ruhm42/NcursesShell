@@ -10,10 +10,15 @@ SRC =	main.c\
 		ncurses_display.c\
 		ncurses_remember.c\
 		ncurses_history.c\
-		ncurses_extension.c\
 		ncurses_completion.c\
+		ncurses_str_extract.c\
 		radix_tree.c\
 		radix_build_tree.c\
+		radix_utils.c\
+		radix_search.c\
+		gnl.c\
+		radix_wrap.c\
+		radix_extension.c\
 
 OBJ =	$(SRC:.c=.o)
  

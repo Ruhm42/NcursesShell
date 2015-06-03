@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 16:34:50 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/05/30 17:59:01 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/03 12:13:38 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void		nc_loop(t_ncurses *nc)
 			ctn_create(&(nc->str), k);
 			nc_reset_history(nc);
 		}
+		if (k != '\t')
+			nc_reset_completion(nc);
 		nc_display(nc);
 	}
 }

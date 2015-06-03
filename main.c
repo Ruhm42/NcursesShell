@@ -6,15 +6,16 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:50:28 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 16:50:19 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/03 15:12:07 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ncurses_shell.h"
 
-#define LOG "log.txt"
 #include <fcntl.h>
 #include <unistd.h>
+
+#define LOG "log.txt"
 #define MOD  S_IRUSR | S_IWUSR |S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH
 
 void	log_txt(char *lg)
@@ -37,18 +38,15 @@ void	log_txt(char *lg)
 **	nc_end only calls endwin()
 */
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	t_ncurses	nc;
 
-	if (!nc_start(&nc))
+	/*
+	**	argv[1] will add entries in radix_tree for auto completion
+	*/
+	if (!nc_start(&nc, argc, argv))
 		return (nc_delete(&nc));
-	radix_insert(&(nc.tree), strdup("test"));
-	radix_insert(&(nc.tree), strdup("teste"));
-	radix_insert(&(nc.tree), strdup("testasqqew"));
-	radix_insert(&(nc.tree), strdup("testasq"));
-	radix_insert(&(nc.tree), strdup("testasqqewtest"));
-	radix_insert(&(nc.tree), strdup("testasqqewte"));
 	while (!nc.stopped)
 	{
 		nc_loop(&nc);

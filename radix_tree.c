@@ -6,11 +6,11 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/01 11:44:04 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 15:09:17 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/02 13:49:41 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ncurses_shell.h"
+#include "radix.h"
 
 static void		radix_join(t_rdx **root, t_rdx *actual, char *str)
 {
@@ -37,14 +37,22 @@ static void		radix_add(t_rdx *actual, char *str)
 
 static void		radix_split(t_rdx *actual, char *str, unsigned int index)
 {
-	radix_insert(&actual, str + index);
+	t_rdx *save;
+
+	save = actual->down;
+	actual->down = NULL;
 	radix_insert(&actual, actual->str + index);
-	if (actual->str[index])
+	if (actual->down)
 	{
-		actual->str[index] = 0;
-		if (str[index])
-			actual->st = false;
+		actual->down->st = actual->st;
+		actual->down->down = save;
 	}
+	else
+		actual->down = save;
+	radix_insert(&actual, str + index);
+	if (actual->str[index])
+		actual->st = false;
+	actual->str[index] = 0;
 }
 
 static void		radix_iterate(t_rdx **root, t_rdx *tmp, char *str)

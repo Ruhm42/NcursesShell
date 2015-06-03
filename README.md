@@ -1,3 +1,3 @@
 # NcursesShell
 
-Working one radix tree for completion
+Waiting for hashtable for suggest paramater

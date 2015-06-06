@@ -6,51 +6,45 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/01 14:50:37 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/01 17:29:15 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/06 15:20:12 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ncurses_shell.h"
 
-char		*strjoin(char const *s1, char const *s2)
+void	line_to_kvp(t_ncurses *nc, char *line)
 {
-	char	*r;
-	size_t	i;
-	size_t	j;
+	int	index;
 
-	i = strlen(s1) + strlen(s2);
-	if (!(r = malloc(sizeof(*r) * (i + 1))))
-		return (NULL);
-	i = 0;
-	while (s1 && s1[i])
-	{
-		r[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2 && s2[j])
-		r[i++] = s2[j++];
-	r[i] = 0;
-	return (r);
+	index = -1;
+	while (line[++index])
+		if (line[index] == ' ')
+			break ;
+	if (!index || !line[index])
+		return ;
+	line[index] = 0;
+	init_kvp(nc, line, line + index + 1);
 }
 
-void		radix_print(t_rdx *root, char *cur)
+void	ncurses_conf_from_file(t_ncurses *nc, char *file)
 {
-	if (!root)
+	int		fd;
+	char	*line;
+
+	if ((fd = open(file, O_RDONLY)) == -1)
 		return ;
-	while (root)
+	line = NULL;
+	hash_create_str_str((&nc->map), 100);
+	while (gnl(fd, &line))
 	{
-		if (root->st)
-		{
-			if (cur)
-				printf("%s\n", strjoin(cur, root->str));
-			else
-				printf("%s\n", root->str);
-		}
-		if (cur)
-			radix_print(root->down, strjoin(cur, root->str));
-		else
-			radix_print(root->down, root->str);
-		root = root->next;
+		line_to_kvp(nc, line);
+		if (line)
+			free(line);
 	}
+	if (line)
+	{
+		line_to_kvp(nc, line);
+		free(line);
+	}
+	close(fd);
 }

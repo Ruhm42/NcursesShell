@@ -6,13 +6,13 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/29 14:52:36 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/05/30 18:11:51 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/06 15:19:59 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ncurses_shell.h"
 
-static void		nc_write_ptr(t_ncurses *nc, char *ptr)
+void			nc_write_ptr(t_ncurses *nc, char *ptr)
 {
 	int	i;
 
@@ -82,6 +82,7 @@ void			nc_display(t_ncurses *nc)
 		waddch(nc->win, ptr->c);
 		ptr = ptr->next;
 	}
+	display_help(nc);
 	wmove(nc->win, init.y + (init.x + nc->str.pos) / nc->sz.x,
 		(init.x + nc->str.pos) % nc->sz.x);
 }

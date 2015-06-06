@@ -8,6 +8,7 @@ SRC =	main.c\
 		ncurses_keys.c\
 		ncurses_fct.c\
 		ncurses_display.c\
+		ncurses_displayhelp.c\
 		ncurses_remember.c\
 		ncurses_history.c\
 		ncurses_completion.c\
@@ -15,10 +16,17 @@ SRC =	main.c\
 		radix_tree.c\
 		radix_build_tree.c\
 		radix_utils.c\
+		ncurses_extension.c\
 		radix_search.c\
 		gnl.c\
 		radix_wrap.c\
 		radix_extension.c\
+		hash_create.c\
+		hash_index.c\
+		hash_put.c\
+		hash_str_str.c\
+		hash_utils.c\
+		hash_get.c\
 
 OBJ =	$(SRC:.c=.o)
  

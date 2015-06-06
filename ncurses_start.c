@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:53:17 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/03 12:09:10 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/06 15:00:04 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ static void		init_fcts(t_ncurses *nc)
 	nc_fct_init(&(nc->fcts[6]), '\t', nc_tab);
 }
 
+void			init_kvp(t_ncurses *nc, char *k, char *v)
+{
+	radix_insert(&(nc->search.tree), k);
+	hash_put(&(nc->map), k, v);
+}
+
 static void		nc_init_radix(t_ncurses *nc, int ac, char **av)
 {
 	memset(&(nc->search), 0, sizeof(t_search));
 	if (ac > 1)
-		radix_from_file(&(nc->search.tree), av[1]);
+		return (ncurses_conf_from_file(nc, av[1]));
+	hash_create_str_str((&nc->map), 100);
 }
 
 bool			nc_start(t_ncurses *nc, int ac, char **av)
@@ -44,6 +51,8 @@ bool			nc_start(t_ncurses *nc, int ac, char **av)
 	getmaxyx(nc->win, nc->sz.y, nc->sz.x);
 	nc->stopped = false;
 	init_fcts(nc);
+	start_color();
+	init_pair(1, COLOR_RED, COLOR_BLACK);
 	nc_display(nc);
 	return (true);
 }

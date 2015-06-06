@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/01 15:18:39 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/03 14:45:58 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/06 10:21:06 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		nc_reset_completion(t_ncurses *nc)
 	{
 		clear_str(&(nc->search.target));
 		nc->str.pos_tab = 0;
+		nc->help = NULL;
 	}
 }
 
@@ -44,6 +45,11 @@ static char	*select_suggest(t_search *search, bool state)
 		return (ptr);
 	}
 	return (NULL);
+}
+
+void		nc_help(t_ncurses *nc, char *suggest)
+{
+	nc->help = hash_get(&(nc->map), suggest);
 }
 
 void		nc_tab(void *arg)
@@ -70,5 +76,6 @@ void		nc_tab(void *arg)
 	{
 		reset_extracted_str(&(nc->str), end, left);
 		ncurses_str_import(&(nc->str), suggest, end, &left);
+		nc_help(nc, suggest);
 	}
 }

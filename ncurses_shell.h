@@ -6,7 +6,7 @@
 /*   By: rda-cost <rda-cost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/05/28 13:51:03 by rda-cost          #+#    #+#             */
-/*   Updated: 2015/06/06 15:21:12 by rda-cost         ###   ########.fr       */
+/*   Updated: 2015/06/08 17:59:37 by rda-cost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void				nc_attrib_history(t_str *str, t_ctn *ev);
 
 void				ncurses_str_import(t_str *s, char *n,
 	t_ctn *e, unsigned int *l);
-void				reset_extracted_str(t_str *s, t_ctn *e, unsigned int s);
+void				reset_extracted_str(t_str *str, t_ctn *e, unsigned int sz);
 char				*ncurses_str_extract(t_str *s, t_ctn **e, unsigned int *l);
 void				clear_str(char **s);
 void				str_clear(t_str *str);
